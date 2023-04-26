@@ -17,6 +17,7 @@ for line in f:
 
 letters_dict = {}
 
+#записываем колчество каждого непробельного символа в словарь
 for letter in msg:
   # letters_dict[letter] = letters_dict.get(letter, 0) + 1
   if letter != ' ':
@@ -25,19 +26,23 @@ for letter in msg:
     else:
       letters_dict[letter] = 1
 
+# сортируем по коду символа
 sorted_letters = sorted(letters_dict.items(), key=lambda x: x[0])
 max_ = max(letters_dict.values())
 
+# создаем пустой массив нужной "высоты" - максимальное значение встречаемости сомвола + 1 строка для вывода символов
 n = len(sorted_letters)
 mas = [' '] * (max_+1)
 for i in range(max_+1): 
   mas[i] = [' '] * (n+1)
 
+# где частота встречаемости больше номера строки, вставляем #
 for i in range(max_, 0, -1):
   for j, let in enumerate(sorted_letters):
     if let[1] >= i:
       mas[max_-i][j] = '#'
 
+#последнюю строку заполняет отсортированными символами
 for j, l in enumerate(sorted_letters):
   mas[-1][j] = l[0]
 
